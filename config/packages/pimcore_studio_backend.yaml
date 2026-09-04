@@ -1,0 +1,9 @@
+# Test-app-only Studio backend settings.
+# The default jwt_key ("some-secret-default") is shorter than the 256 bits
+# lcobucci/jwt requires, so /pimcore-studio/api/mercure/auth fails with a 500
+# out of the box. This is a static test value — real installations must set
+# their own secret.
+pimcore_studio_backend:
+    mercure_settings:
+        jwt_key: 'coreshop-test-app-mercure-jwt-key-0123456789abcdef'
+

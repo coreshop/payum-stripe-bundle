@@ -1,5 +1,61 @@
-# composer
-/vendor/
+######################
+# Compiled source    #
+######################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
 
-# PhpStorm / IDEA
-.idea
+######################
+# Packages           #
+######################
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+
+######################
+# Logs and databases #
+######################
+*.log
+
+######################
+# Global             #
+######################
+.DS_Store
+.DS_Store\?
+._*
+.Spotlight-V100
+.Trashes
+Icon\?
+*.sublime-workspace
+*.sublime-project
+atlassian-ide-plugin.xml
+.idea/
+.project
+Thumbs.db
+phpda.html
+var
+.env.local
+public/bundles
+config/local
+vendor
+supervisord.pid
+composer.lock
+config/reference.php
+cache/
+
+node_modules/
+src/Resources/assets/pimcore-studio/package-lock.json
+
+# Expanded Studio frontend build. Not committed: the build ships as an archive in
+# Resources/build-dist/build-<id>.zip, which Pimcore's BuildArchiveExtractor unpacks into
+# Resources/public/studio at cache warmup. The extractor's marker, lock and temporary
+# directories live next to the build.
+src/Resources/public/studio/*
+src/Resources/public/.studio*

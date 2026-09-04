@@ -1,0 +1,48 @@
+imports:
+    - { resource: services.yml }
+
+parameters:
+    env(DATABASE_DRIVER): pdo_mysql
+    env(DATABASE_HOST): ''
+    env(DATABASE_PORT): ''
+    env(DATABASE_USER): ''
+    env(DATABASE_PASSWORD): ''
+    env(DATABASE_NAME): ''
+    env(DATABASE_VERSION): '8.0.26'
+    env(MAILER_MAIN): ''
+    env(MAILER_NEWSLETTER): ''
+    database_driver: '%env(DATABASE_DRIVER)%'
+    database_host: '%env(DATABASE_HOST)%'
+    database_port: '%env(DATABASE_PORT)%'
+    database_name: '%env(DATABASE_NAME)%'
+    database_user: '%env(DATABASE_USER)%'
+    database_password: '%env(DATABASE_PASSWORD)%'
+    database_version: '%env(DATABASE_VERSION)%'
+    mailer_main: '%env(MAILER_MAIN)%'
+    mailer_newsletter: '%env(MAILER_NEWSLETTER)%'
+
+doctrine:
+    dbal:
+        connections:
+            default:
+                driver: '%database_driver%'
+                host: '%database_host%'
+                port: '%database_port%'
+                dbname: '%database_name%'
+                user: '%database_user%'
+                password: '%database_password%'
+                charset: 'utf8mb4'
+                # No `enum: string` here: DBAL 4 maps MySQL ENUM to its own
+                # enum type, which round-trips. Mapping it to string makes
+                # introspected ENUM columns strings without a length, and every
+                # schema comparison over them (e.g. the Generic Data Index
+                # installer) then dies with 'Column "type" has invalid type'.
+                mapping_types: { bit: boolean }
+                server_version: '%env(DATABASE_VERSION)%'
+
+pimcore:
+    encryption:
+        secret: "%env(PIMCORE_SECRET)%"
+    product_registration:
+        instance_identifier: "%env(PIMCORE_INSTANCE_IDENTIFIER)%"
+        product_key: "%env(PIMCORE_PRODUCT_KEY)%"

@@ -1,0 +1,6 @@
+# The dev stack terminates TLS in front of php-fpm; trust the forwarding
+# proxy so generated URLs (e.g. the web debug toolbar) use https and pass
+# Studio's Content-Security-Policy.
+framework:
+    trusted_proxies: 'REMOTE_ADDR'
+    trusted_headers: ['x-forwarded-for', 'x-forwarded-proto', 'x-forwarded-host', 'x-forwarded-port']

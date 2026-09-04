@@ -1,59 +1,66 @@
 {
-    "name": "coreshop/payum-stripe-bundle",
-    "type": "pimcore-bundle",
-    "description": "CoreShop - Stripe Bundle",
-    "keywords": [
-        "coreshop",
-        "pimcore",
-        "ecommerce",
-        "stripe"
-    ],
-    "homepage": "http://www.coreshop.org",
-    "license": "GPL-3.0-or-later",
-    "authors": [
-        {
-            "name": "Certimeter Group Mario Ramundo",
-            "email": "mario.ramundo@certimetergroup.com",
-            "homepage": "http://www.certimetergroup.com/",
-            "role": "Developer"
-        },
-        {
-            "name": "CoreShop Team",
-            "email": "info@coreshop.org",
-            "homepage": "https://www.coreshop.org/",
-            "role": "Developer"
-        },
-        {
-            "name": "Dominik Pfaffenbauer",
-            "email": "dominik@pfaffenbauer.at",
-            "homepage": "https://www.pfaffenbauer.at/",
-            "role": "Developer"
-        }
-    ],
-    "require": {
-        "php": ">=8.0",
-        "flux-se/payum-stripe": "^2.0",
-        "coreshop/core-shop": "^3.0 || ^4.0"
-    },
-    "require-dev": {
-        "symfony/http-client": "^6.2"
-    },
-    "config": {
-        "bin-dir": "bin"
-    },
-    "autoload": {
-        "psr-4": {
-            "CoreShop\\Payum\\StripeBundle\\": "src/CoreShop/Payum/StripeBundle"
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "2.1-dev"
-        },
-        "pimcore": {
-            "bundles": [
-                "CoreShop\\Payum\\StripeBundle\\StripeBundle"
-            ]
-        }
+  "name": "coreshop/payum-stripe-bundle",
+  "type": "pimcore-bundle",
+  "description": "CoreShop - Stripe Checkout and Stripe.js payment gateways",
+  "keywords": [
+    "coreshop",
+    "pimcore",
+    "ecommerce",
+    "payment",
+    "stripe",
+    "payum"
+  ],
+  "homepage": "https://www.coreshop.com",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "CoreShop GmbH",
+      "email": "info@coreshop.com",
+      "homepage": "https://www.coreshop.com/",
+      "role": "TEAM"
     }
+  ],
+  "require": {
+    "php": "~8.4.0 || ~8.5.0",
+    "coreshop/core-shop": "2026.x-dev",
+    "coreshop/enterprise-subscription-bundle": "^2026.2",
+    "flux-se/payum-stripe": "^2.1"
+  },
+  "require-dev": {
+    "coreshop/test-setup": "1.0.x-dev",
+    "pimcore/studio-ui-bundle": "^2026.2",
+    "symfony/runtime": "^6.4 || ^7.0"
+  },
+  "suggest": {
+    "pimcore/studio-ui-bundle": "^2026.2 - Pimcore Studio, the admin UI"
+  },
+  "autoload": {
+    "psr-4": {
+      "CoreShop\\Payum\\StripeBundle\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "classmap": [
+      "Kernel.php"
+    ],
+    "psr-4": {
+      "Pimcore\\Model\\DataObject\\": "var/classes/DataObject"
+    }
+  },
+  "extra": {
+    "pimcore": {
+      "bundles": [
+        "CoreShop\\Payum\\StripeBundle\\StripeBundle"
+      ]
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": {
+      "php-http/discovery": true,
+      "symfony/runtime": true
+    }
+  }
 }

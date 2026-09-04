@@ -1,0 +1,82 @@
+<?php
+
+declare(strict_types=1);
+
+/*
+ * CoreShop
+ *
+ * This source file is available under two different licenses:
+ *  - GNU General Public License version 3 (GPLv3)
+ *  - CoreShop Commercial License (CCL)
+ * Full copyright and license information is available in
+ * LICENSE.md which is distributed with this source code.
+ *
+ * @copyright  Copyright (c) CoreShop GmbH (https://www.coreshop.com)
+ * @license    https://www.coreshop.com/license     GPLv3 and CCL
+ *
+ */
+
+namespace CoreShop\Payum\StripeBundle\Form\Payment;
+
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Validator\Constraints\NotBlank;
+
+class StripeGatewayConfigurationType extends AbstractType
+{
+    public function getBlockPrefix(): string
+    {
+        return 'stripe_gateway_configuration';
+    }
+
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('publishable_key', TextType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'groups' => 'coreshop',
+                    ]),
+                ],
+            ])
+            ->add('secret_key', TextType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'groups' => 'coreshop',
+                    ]),
+                ],
+            ])
+            ->add('webhook_secret_keys', TextType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'groups' => 'coreshop',
+                    ]),
+                ],
+            ])
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event): void {
+                $data = $event->getData();
+
+                if (!\is_array($data)) {
+                    return;
+                }
+
+                $data['payum.http_client'] = '@coreshop.payum.http_client';
+                $event->setData($data);
+            })
+        ;
+
+        // Workaround for allow multiple insertion in a single text field
+        $builder->get('webhook_secret_keys')
+            ->addModelTransformer(new CallbackTransformer(
+                // array -> comma separated string
+                fn (?array $webhookSecretKeys): ?string => $webhookSecretKeys ? implode(',', $webhookSecretKeys) : null,
+                // comma separated string -> array
+                fn (?string $webhookSecretKeys): ?array => $webhookSecretKeys ? array_map('trim', explode(',', $webhookSecretKeys)) : null,
+            ))
+        ;
+    }
+}

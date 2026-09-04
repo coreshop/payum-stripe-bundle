@@ -1,0 +1,6 @@
+# The Studio build is committed as one archive per build id. Treat it as binary and take the
+# current side wholesale on merges instead of conflicting: the next build on the merged branch
+# produces the right archive anyway.
+src/Resources/build-dist/build-*.zip linguist-generated=true
+src/Resources/build-dist/build-*.zip binary
+src/Resources/build-dist/build-*.zip merge=ours

@@ -1,17 +1,54 @@
-# CoreShop Stripe Payum Connector
-This Bundle activates the Stripe Checkout & Stripe JS Payment Gateways in CoreShop.
-It requires the [FLUX-SE/PayumStripe](https://github.com/FLUX-SE/PayumStripe) repository which will be installed automatically.
+# CoreShop Stripe Payum Bundle
+
+Stripe Checkout (`stripe_checkout`) and Stripe.js (`stripe_js`) payment gateways for CoreShop, built on
+[FLUX-SE/PayumStripe](https://github.com/FLUX-SE/PayumStripe).
+
+| Branch   | CoreShop | Pimcore | PHP       |
+|----------|----------|---------|-----------|
+| `2026.x` | 2026.x   | 2026    | 8.4, 8.5  |
+| `3.x`    | 5.1      | 12      | 8.3, 8.4  |
+| `2.x`    | 3 / 4    | 10 / 11 | 8.0+      |
+
+This bundle is licensed under the CoreShop Commercial License and requires a CoreShop enterprise subscription.
+`coreshop/enterprise-subscription-bundle` is installed automatically; configure `CORESHOP_ENTERPRISE_TOKEN`
+as described in its [README](https://github.com/coreshop/enterprise-subscription-bundle).
 
 ## Installation
 
-#### 1. Composer
-
 ```bash
-composer req coreshop/payum-stripe-bundle:^2.0
+composer require coreshop/payum-stripe-bundle:^2026.1
+bin/console pimcore:bundle:enable StripeBundle
 ```
 
-#### 2. Activate
-Enable the Bundle in Pimcore Extension Manager
+The bundle is delivered through the CoreShop Private Packagist repository (see the enterprise subscription bundle
+README for the `repositories` and `auth.json` setup).
 
-#### 3. Setup
-Go to Coreshop -> PaymentProvider and add a new Provider. Choose `stripe_checkout`/`stripe_js` from `type` and fill out the required fields.
+## Configuration
+
+In Pimcore Studio open *CoreShop → Payment Providers*, add a provider and choose the factory `stripe_checkout` or
+`stripe_js`. The form asks for
+
+- **Publishable key** and **Secret key** of your Stripe account,
+- **Webhook secret keys**, comma separated if you use more than one endpoint.
+
+Register a webhook endpoint in Stripe pointing to your shop's Payum notify URL (`/payment/notify/...`, see the
+Payum documentation) so that asynchronous payment updates reach CoreShop.
+
+Optional settings for the Stripe Checkout line items:
+
+```yaml
+coreshop_payum_stripe_checkout:
+    line_item_image:
+        thumbnail_name: coreshop_productDetail
+        fallback_image: 'https://placehold.it/400x300'
+```
+
+## Development
+
+The repository contains a runnable test app (`bin/console`, `docker-compose.yaml`). Static checks:
+
+```bash
+vendor/bin/ecs check src
+vendor/bin/phpstan
+vendor/bin/psalm
+```

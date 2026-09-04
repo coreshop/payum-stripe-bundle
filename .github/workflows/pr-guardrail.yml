@@ -1,0 +1,58 @@
+# ⚠️  CENTRALLY MANAGED FILE — DO NOT EDIT LOCALLY!
+#
+# This file is distributed from coreshop/workflow-collection via file sync
+# (source: templates/pr-guardrail.yml). Local changes will be overwritten by
+# the next sync run via PR.
+#
+# Rules, bypass and FAQ: docs/GUARDRAILS.md in coreshop/workflow-collection.
+
+name: PR Guardrail
+
+on:
+  # pull_request_target instead of pull_request: always runs with the code
+  # and secrets of the base branch. The guardrail NEVER checks out PR code —
+  # important because repos may receive PRs from forks.
+  pull_request_target:
+    types: [opened, reopened, edited, ready_for_review, labeled, unlabeled]
+  # Reacts to completed CI runs (R5) …
+  check_suite:
+    types: [completed]
+  # … and to classic commit statuses of external CI systems.
+  status: {}
+
+permissions:
+  actions: read
+
+# One run per PR: new events cancel running evaluations of the same PR.
+concurrency:
+  group: pr-guardrail-${{ github.event.pull_request.number || github.event.check_suite.head_sha || github.event.sha || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  guardrail:
+    uses: coreshop/workflow-collection/.github/workflows/pr-guardrail.yml@v1
+    with:
+      # Enforce mode: violations convert the PR to draft and the check fails.
+      # Switch to `false` for advisory mode (comment only).
+      enforce: true
+      # Bot PRs (e.g. Renovate/Dependabot) skip R1-R3/R6 automatically, the
+      # CI rule (R5) still applies. Merge-up PRs — a version branch merged
+      # forward, or an `upmerge/<from>_<to>` branch — additionally skip R4.
+      # Release PRs (`release/<version>`) skip the same rules and must carry
+      # the milestone of the released version instead (R8).
+      # More options (defaults in parentheses):
+      # min-body-chars: 50               # minimum PR description length (50)
+      # require-issue-open: true         # issue must be open (true)
+      # version-branch-pattern: '^\d+\.x$'  # R7 base-branch rule ('' disables)
+      # merge-up-branch-pattern: '^upmerge/'  # extra merge-up heads ('' disables)
+      # release-branch-pattern: '^release/(\d+(?:\.\d+)+(?:-[0-9A-Za-z.]+)?)$'  # release heads, R8 ('' disables)
+      # bots: 'renovate[bot],dependabot[bot],github-actions[bot]'
+      # bot-require-body: false          # R4 for bot PRs too (false)
+    secrets: inherit
+
+  # Adds the PR to the "CoreShop Development" project board.
+  # Comment out to disable.
+  add-to-project:
+    if: github.event_name == 'pull_request_target'
+    uses: coreshop/workflow-collection/.github/workflows/add-to-project.yml@v1
+    secrets: inherit

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+  CENTRALLY MANAGED FILE : DO NOT EDIT LOCALLY!
+  Distributed from coreshop/workflow-collection (source: templates/psalm.xml).
+
+  findUnusedIssueHandlerSuppression is disabled because the included shared
+  config (coreshop/test-setup) suppresses issue types that not every bundle
+  triggers - Psalm 6 would otherwise fail on the unused suppression, and this
+  root attribute is not carried over by the xi:include below.
+-->
+<psalm xmlns:xi="http://www.w3.org/2001/XInclude" findUnusedIssueHandlerSuppression="false">
+    <xi:include
+            href="vendor/coreshop/test-setup/psalm.xml"
+            xpointer="xmlns(ps=https://getpsalm.org/schema/config)xpointer(/psalm/*)"
+    />
+</psalm>

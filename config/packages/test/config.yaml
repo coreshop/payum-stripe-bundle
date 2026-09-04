@@ -1,0 +1,44 @@
+imports:
+    - { resource: ../../config.yaml }
+    - { resource: ../../../vendor/coreshop/core-shop/src/CoreShop/Behat/Resources/config/services.yml }
+    - { resource: ../../../src/Behat/Resources/config/services.yml }
+
+pimcore:
+    targeting:
+        enabled: false
+
+doctrine:
+    dbal:
+        connections:
+            default:
+                url: '%pimcore_test.db.dsn%'
+                host: ''
+                port: ''
+                dbname: ''
+                user: ''
+                password: ''
+
+parameters:
+    pimcore_test.db.dsn: '%env(PIMCORE_TEST_DB_DSN)%'
+    env(PIMCORE_TEST_DB_DSN): ~
+
+framework:
+    session:
+        handler_id:  ~
+        storage_id: session.storage.mock_file
+        name: MOCKSESSID
+
+monolog:
+    handlers:
+        main:
+            level: error
+        console:
+            channels: ['!event', '!doctrine', '!console', '!cache']
+
+# Fallback for runs that export no PIMCORE_OPENSEARCH_DSN — the DSN itself
+# cannot be set here, the Generic Data Index bundle re-declares it from the
+# environment in its prepend() and that wins over app config.
+pimcore_open_search_client:
+    clients:
+        default:
+            hosts: ['http://127.0.0.1:9200']

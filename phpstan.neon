@@ -1,0 +1,3 @@
+includes:
+    - vendor/coreshop/test-setup/phpstan.neon
+
