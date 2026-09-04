@@ -9,19 +9,12 @@ Stripe Checkout (`stripe_checkout`) and Stripe.js (`stripe_js`) payment gateways
 | `3.x`    | 5.1      | 12      | 8.3, 8.4  |
 | `2.x`    | 3 / 4    | 10 / 11 | 8.0+      |
 
-This bundle is licensed under the CoreShop Commercial License and requires a CoreShop enterprise subscription.
-`coreshop/enterprise-subscription-bundle` is installed automatically; configure `CORESHOP_ENTERPRISE_TOKEN`
-as described in its [README](https://github.com/coreshop/enterprise-subscription-bundle).
-
 ## Installation
 
 ```bash
 composer require coreshop/payum-stripe-bundle:^2026.1
 bin/console pimcore:bundle:enable StripeBundle
 ```
-
-The bundle is delivered through the CoreShop Private Packagist repository (see the enterprise subscription bundle
-README for the `repositories` and `auth.json` setup).
 
 ## Configuration
 

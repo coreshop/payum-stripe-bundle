@@ -23,7 +23,6 @@
   "require": {
     "php": "~8.4.0 || ~8.5.0",
     "coreshop/core-shop": "2026.x-dev",
-    "coreshop/enterprise-subscription-bundle": "^2026.2",
     "flux-se/payum-stripe": "^2.1"
   },
   "require-dev": {
