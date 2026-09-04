@@ -52,10 +52,3 @@ cache/
 
 node_modules/
 src/Resources/assets/pimcore-studio/package-lock.json
-
-# Expanded Studio frontend build. Not committed: the build ships as an archive in
-# Resources/build-dist/build-<id>.zip, which Pimcore's BuildArchiveExtractor unpacks into
-# Resources/public/studio at cache warmup. The extractor's marker, lock and temporary
-# directories live next to the build.
-src/Resources/public/studio/*
-src/Resources/public/.studio*

@@ -22,12 +22,3 @@ jobs:
   static:
     uses: coreshop/workflow-collection/.github/workflows/static.yml@v1
     secrets: inherit
-    # The matrix is passed here rather than left to the reusable workflow's
-    # default because it belongs to a release line, not to the CI system: this
-    # template is only ever written to a repo's default branch, which is the
-    # current development line (2026.x), whose bundles require ~8.4 || ~8.5 and
-    # cannot even `composer install` on 8.3. Older release branches keep the
-    # caller they were synced with, so their matrix stays whatever was correct
-    # for them. Matches coreshop/CoreShop's own 2026.x matrix.
-    with:
-      php_versions: '["8.4", "8.5"]'

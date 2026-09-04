@@ -34,11 +34,3 @@ monolog:
             level: error
         console:
             channels: ['!event', '!doctrine', '!console', '!cache']
-
-# Fallback for runs that export no PIMCORE_OPENSEARCH_DSN — the DSN itself
-# cannot be set here, the Generic Data Index bundle re-declares it from the
-# environment in its prepend() and that wins over app config.
-pimcore_open_search_client:
-    clients:
-        default:
-            hosts: ['http://127.0.0.1:9200']

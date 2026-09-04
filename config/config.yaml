@@ -32,12 +32,7 @@ doctrine:
                 user: '%database_user%'
                 password: '%database_password%'
                 charset: 'utf8mb4'
-                # No `enum: string` here: DBAL 4 maps MySQL ENUM to its own
-                # enum type, which round-trips. Mapping it to string makes
-                # introspected ENUM columns strings without a length, and every
-                # schema comparison over them (e.g. the Generic Data Index
-                # installer) then dies with 'Column "type" has invalid type'.
-                mapping_types: { bit: boolean }
+                mapping_types: { enum: string, bit: boolean }
                 server_version: '%env(DATABASE_VERSION)%'
 
 pimcore:

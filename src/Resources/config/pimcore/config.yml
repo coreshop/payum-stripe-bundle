@@ -1,0 +1,6 @@
+core_shop_payment:
+    pimcore_admin:
+        js:
+            stripe_gateway: '/bundles/stripe/pimcore/js/stripe.js'
+            stripe_checkout_gateway: '/bundles/stripe/pimcore/js/stripe_checkout.js'
+            stripe_js_gateway: '/bundles/stripe/pimcore/js/stripe_js.js'

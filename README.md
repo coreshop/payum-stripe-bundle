@@ -16,7 +16,7 @@ as described in its [README](https://github.com/coreshop/enterprise-subscription
 ## Installation
 
 ```bash
-composer require coreshop/payum-stripe-bundle:^2026.1
+composer require coreshop/payum-stripe-bundle:^3.0
 bin/console pimcore:bundle:enable StripeBundle
 ```
 
@@ -25,7 +25,7 @@ README for the `repositories` and `auth.json` setup).
 
 ## Configuration
 
-In Pimcore Studio open *CoreShop → Payment Providers*, add a provider and choose the factory `stripe_checkout` or
+In the Pimcore admin (classic ExtJS or Pimcore Studio) open *CoreShop → Payment Providers*, add a provider and choose the factory `stripe_checkout` or
 `stripe_js`. The form asks for
 
 - **Publishable key** and **Secret key** of your Stripe account,

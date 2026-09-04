@@ -1,0 +1,15 @@
+# Test-app search stack for the Generic Data Index (Studio trees/search).
+# The shared dev-compose (pimcore2026.x) ships an elasticsearch service.
+# Only in dev: the Studio stack bundles are dev-env-only (Behat runs in test).
+when@dev:
+    pimcore_elasticsearch_client:
+        es_clients:
+            default:
+                hosts:
+                    - 'http://elasticsearch:9200'
+
+    pimcore_generic_data_index:
+        index_service:
+            client_params:
+                client_type: elasticsearch
+

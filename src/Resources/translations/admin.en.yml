@@ -1,0 +1,4 @@
+stripe_publishable_key: 'Publishable key'
+stripe_secret_key: 'Secret key'
+stripe_webhook_secret_keys: 'Webhook secret keys'
+stripe_webhook_secret_keys_tooltip: 'Insert webhook secret keys separated by comma (,)'

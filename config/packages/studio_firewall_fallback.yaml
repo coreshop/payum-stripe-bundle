@@ -1,0 +1,21 @@
+# security.yaml references %pimcore_studio_backend.firewall_settings% in every
+# environment, but the Studio stack bundles are dev-only. Outside dev the
+# parameter would not exist and the container could not compile — provide an
+# inert fallback firewall (no Studio routes exist there anyway).
+when@test:
+    parameters:
+        pimcore_studio_backend.firewall_settings:
+            pattern: '^/pimcore-studio'
+            security: false
+
+when@test_precision:
+    parameters:
+        pimcore_studio_backend.firewall_settings:
+            pattern: '^/pimcore-studio'
+            security: false
+
+when@prod:
+    parameters:
+        pimcore_studio_backend.firewall_settings:
+            pattern: '^/pimcore-studio'
+            security: false

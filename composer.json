@@ -21,18 +21,20 @@
     }
   ],
   "require": {
-    "php": "~8.4.0 || ~8.5.0",
-    "coreshop/core-shop": "2026.x-dev",
-    "coreshop/enterprise-subscription-bundle": "^2026.2",
+    "php": "^8.3",
+    "coreshop/core-shop": "^5.1",
+    "coreshop/enterprise-subscription-bundle": "^2025.1",
     "flux-se/payum-stripe": "^2.1"
   },
   "require-dev": {
     "coreshop/test-setup": "1.0.x-dev",
-    "pimcore/studio-ui-bundle": "^2026.2",
+    "pimcore/admin-ui-classic-bundle": "^2.0",
+    "pimcore/studio-ui-bundle": "^2025.4",
     "symfony/runtime": "^6.4 || ^7.0"
   },
   "suggest": {
-    "pimcore/studio-ui-bundle": "^2026.2 - Pimcore Studio, the admin UI"
+    "pimcore/admin-ui-classic-bundle": "^2.0 - classic ExtJS admin",
+    "pimcore/studio-ui-bundle": "^2025.4 - Pimcore Studio, the admin UI"
   },
   "autoload": {
     "psr-4": {
