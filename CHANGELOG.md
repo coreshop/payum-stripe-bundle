@@ -6,5 +6,4 @@
   (existing gateway panels) and in Pimcore Studio, where the form is rendered from the Symfony form types
   (`coreshop.studio_form`).
 - Bundle layout follows the other CoreShop bundles (flat `src/`, runnable test app, shared CI workflows).
-- Requires `coreshop/enterprise-subscription-bundle` (CoreShop Commercial License).
 - `flux-se/payum-stripe` ^2.1.
