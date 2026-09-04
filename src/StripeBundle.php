@@ -18,22 +18,14 @@ declare(strict_types=1);
 
 namespace CoreShop\Payum\StripeBundle;
 
-use CoreShop\Bundle\EnterpriseSubscriptionBundle\CoreShopEnterpriseSubscriptionBundle;
 use CoreShop\Payum\StripeBundle\DependencyInjection\Compiler\PayumGatewayConfigOverride;
 use Pimcore\Extension\Bundle\AbstractPimcoreBundle;
 use Pimcore\Extension\Bundle\Traits\PackageVersionTrait;
-use Pimcore\HttpKernel\Bundle\DependentBundleInterface;
-use Pimcore\HttpKernel\BundleCollection\BundleCollection;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class StripeBundle extends AbstractPimcoreBundle implements DependentBundleInterface
+class StripeBundle extends AbstractPimcoreBundle
 {
     use PackageVersionTrait;
-
-    public static function registerDependentBundles(BundleCollection $collection): void
-    {
-        $collection->addBundle(new CoreShopEnterpriseSubscriptionBundle());
-    }
 
     public function build(ContainerBuilder $container): void
     {
